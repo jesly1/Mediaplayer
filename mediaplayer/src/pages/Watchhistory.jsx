@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { deletewatchistory, getallwatchhistory } from '../services/allapis'
 
-
-function Watchhistory() {
-
+ function Watchhistory() {
+  const [history,sethistory] =useState([])
+ async function Watchistory(){
+  const response=await getallwatchhistory()
+  const {data} =response;
+  console.log("watchhhhh historyyyy")
+  console.log(data)
+  sethistory(data)
+}
+useEffect(()=>{
+  Watchistory();
+},[])
+const handledelete= async(id)=>{
+  await deletewatchistory(id)
+  Watchistory()
+}
   return (
     <>
     <div className='d-flex justify-content-evenly'>
@@ -22,20 +36,22 @@ function Watchhistory() {
         
       </thead>
       <tbody>
-        <tr>
-         <td>1</td>
-         <td>Heeriye</td>
-         <td>https://youtu.be/9RDnVzHM7ng</td>
-         <td>21-12-23 01:23 PM</td>
-         <td>Delete</td>
-        </tr>
-        <tr>
-         <td>1</td>
-         <td>Heeriye</td>
-         <td>https://youtu.be/9RDnVzHM7ng</td>
-         <td>21-12-23 01:23 PM</td>
-         <td>Delete</td>
-        </tr>
+        {
+          history.length>0?
+          history.map((item,index)=>(
+            <tr>
+        <td>{index+1}</td>
+        <td>{item.caption}</td>
+        <td>{item.embeddedLink}</td>
+        <td>{item.timestamp}</td>
+        <td> <button className='btn btn-danger'><i class="fa-solid fa-trash" onClick={()=>handledelete(item.id)}></i></button>  </td>
+          </tr>
+          ))
+          :
+          <p>No Watch history found</p>
+        }
+       
+        
       </tbody>
     </table>
       

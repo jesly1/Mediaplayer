@@ -19,9 +19,27 @@ export const addtohistory=async(videodetails)=>{
     return await commonapi('POST',`${serverurl}/history/`,videodetails)
 }
 
-//get all  watch history
+// get all  watch history
 
-// export const addtohistory=async(videodetails)=>{
-//     return await commonapi('POST',`${serverurl}/history/`,videodetails)
-// }
+export const getallwatchhistory=async()=>{
+    return await commonapi('GET',`${serverurl}/history/`,"")
+}
+//to delete watch history
 
+export const deletewatchistory=async(id)=>{
+    return await commonapi('DELETE',`${serverurl}/history/${id}`,{})
+}
+//Add category
+export const addcategory=async(reqbody)=>{
+    return await commonapi('POST',`${serverurl}/category`,reqbody)
+}
+// get all  category
+
+export const getallcategories=async()=>{
+    return await commonapi('GET',`${serverurl}/category`,"")
+}
+//to delete all category
+
+export const deleteallcat=async(id)=>{
+    return await commonapi('DELETE',`${serverurl}/category/${id}`,{})
+}
