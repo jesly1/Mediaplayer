@@ -58,7 +58,7 @@ getallcat()
     
     <Link onClick={handleShow} ><button className='btn btn-warning'>Add New Category</button></Link>
     {
-      allcategory.length>0?
+      allcategory?.length>0?
       allcategory.map((item)=>(
         <div className='ms-3'>
       <div className='m-5 border border-secondary rounded p-3'>
